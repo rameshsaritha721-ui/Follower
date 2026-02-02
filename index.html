@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Followers Booster</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: linear-gradient(135deg, #12c2e9, #c471ed, #f64f59);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px 25px;
+            border-radius: 20px;
+            width: 85%;
+            max-width: 350px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+        h1 { font-size: 28px; margin-bottom: 10px; }
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+        }
+        button {
+            width: 90%;
+            padding: 15px;
+            background: #00f2fe;
+            color: #333;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        /* லோடிங் பார் வடிவமைப்பு */
+        #progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+        #progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+        }
+        #progress-fill {
+            width: 0%;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-box">
+        <h1>Instagram</h1>
+        <p>1000 இலவச ஃபாலோவர்ஸ் பெற உங்கள் ஐடியை உள்ளிடவும்</p>
+        
+        <input type="text" id="username" placeholder="Username...">
+        <button onclick="startLoading()">ஃபாலோவர்ஸ் ஏற்றுக</button>
+
+        <div id="progress-container">
+            <p>ஃபாலோவர்ஸ் தயாராகிறது... தயவுசெய்து காத்திருக்கவும்</p>
+            <div id="progress-bar">
+                <div id="progress-fill">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startLoading() {
+            var user = document.getElementById('username').value;
+            if(user == "") {
+                alert("தயவுசெய்து உங்கள் ஐடியை டைப் செய்யவும்!");
+                return;
+            }
+            
+            document.getElementById('progress-container').style.display = 'block';
+            var fill = document.getElementById('progress-fill');
+            var width = 0;
+            var id = setInterval(frame, 50); // வேகம்
+
+            function frame() {
+                if (width >= 100) {
+                    clearInterval(id);
+                    // 100% வந்தவுடன் உங்கள் இன்ஸ்டாகிராம் பக்கத்திற்குச் செல்லும்
+                    window.location.href = "https://www.instagram.com/mr_ss_king_420_/";
+                } else {
+                    width++;
+                    fill.style.width = width + '%';
+                    fill.innerHTML = width + '%';
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
