@@ -7,8 +7,8 @@
     <style>
         body {
             margin: 0;
-            font-family: sans-serif;
-            background: linear-gradient(135deg, #12c2e9, #c471ed, #f64f59);
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,69 +17,84 @@
             text-align: center;
         }
         .container {
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             padding: 40px 25px;
-            border-radius: 20px;
+            border-radius: 25px;
             width: 85%;
             max-width: 350px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-        h1 { font-size: 28px; margin-bottom: 10px; }
+        h1 { font-size: 32px; margin-bottom: 10px; font-weight: bold; }
         input {
             width: 90%;
-            padding: 12px;
+            padding: 15px;
             margin: 15px 0;
-            border-radius: 8px;
+            border-radius: 10px;
             border: none;
-            outline: none;
+            font-size: 16px;
         }
         button {
-            width: 90%;
+            width: 100%;
             padding: 15px;
-            background: #00f2fe;
-            color: #333;
+            background: #ffffff;
+            color: #d6249f;
             font-weight: bold;
-            border-radius: 8px;
+            border-radius: 10px;
             border: none;
             font-size: 18px;
             cursor: pointer;
+            transition: 0.3s;
         }
-        /* லோடிங் பார் வடிவமைப்பு */
-        #progress-container {
+        #progress-container, #share-section {
             display: none;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         #progress-bar {
             width: 100%;
-            background-color: #ddd;
-            border-radius: 10px;
+            background-color: #444;
+            border-radius: 15px;
+            overflow: hidden;
         }
         #progress-fill {
             width: 0%;
-            height: 20px;
-            background-color: #4caf50;
-            border-radius: 10px;
+            height: 25px;
+            background: linear-gradient(90deg, #4caf50, #8bc34a);
             text-align: center;
-            line-height: 20px;
+            line-height: 25px;
+            font-size: 14px;
+        }
+        .share-btn {
+            background: #25D366;
             color: white;
-            font-size: 12px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container" id="main-box">
-        <h1>Instagram</h1>
-        <p>1000 இலவச ஃபாலோவர்ஸ் பெற உங்கள் ஐடியை உள்ளிடவும்</p>
-        
-        <input type="text" id="username" placeholder="Username...">
-        <button onclick="startLoading()">ஃபாலோவர்ஸ் ஏற்றுக</button>
+    <div class="container">
+        <div id="input-section">
+            <h1>Instagram</h1>
+            <p>1000 இலவச ஃபாலோவர்ஸ் பெற உங்கள் ஐடியை உள்ளிடவும்</p>
+            <input type="text" id="username" placeholder="உங்களுடைய Username...">
+            <button onclick="startLoading()">ஃபாலோவர்ஸ் ஏற்றுக</button>
+        </div>
 
         <div id="progress-container">
-            <p>ஃபாலோவர்ஸ் தயாராகிறது... தயவுசெய்து காத்திருக்கவும்</p>
+            <p id="status-text">ஃபாலோவர்ஸ் தயாராகிறது...</p>
             <div id="progress-bar">
                 <div id="progress-fill">0%</div>
             </div>
+        </div>
+
+        <div id="share-section">
+            <h2 style="color: #4caf50;">வெற்றி! (Success)</h2>
+            <p>ஃபாலோவர்ஸ் உங்கள் கணக்கிற்கு அனுப்பப்பட்டு விட்டனர். உறுதி செய்ய இதை 5 நண்பர்களுக்குப் பகிரவும்!</p>
+            
+            <button class="share-btn" onclick="shareOnWhatsApp()">WhatsApp-ல் பகிரவும்</button>
+            
+            <p style="margin-top: 20px; font-size: 12px; opacity: 0.8;">ஷேர் செய்த பிறகு உங்கள் Instagram பக்கம் திறக்கும்.</p>
         </div>
     </div>
 
@@ -91,22 +106,35 @@
                 return;
             }
             
+            document.getElementById('input-section').style.display = 'none';
             document.getElementById('progress-container').style.display = 'block';
+            
             var fill = document.getElementById('progress-fill');
             var width = 0;
-            var id = setInterval(frame, 50); // வேகம்
+            var id = setInterval(frame, 60);
 
             function frame() {
                 if (width >= 100) {
                     clearInterval(id);
-                    // 100% வந்தவுடன் உங்கள் இன்ஸ்டாகிராம் பக்கத்திற்குச் செல்லும்
-                    window.location.href = "https://www.instagram.com/mr_ss_king_420_/";
+                    document.getElementById('progress-container').style.display = 'none';
+                    document.getElementById('share-section').style.display = 'block';
                 } else {
                     width++;
                     fill.style.width = width + '%';
                     fill.innerHTML = width + '%';
                 }
             }
+        }
+
+        function shareOnWhatsApp() {
+            var text = "நண்பா! எனக்கும் இலவசமாக இன்ஸ்டாகிராம் ஃபாலோவர்ஸ் கிடைத்துவிட்டது. நீயும் முயற்சி செய்: " + window.location.href;
+            var url = "https://wa.me/?text=" + encodeURIComponent(text);
+            window.open(url, '_blank');
+            
+            // ஷேர் செய்த பிறகு இன்ஸ்டாகிராம் பக்கம் செல்ல 2 விநாடி கழித்து ரீடைரக்ட்
+            setTimeout(function() {
+                window.location.href = "https://www.instagram.com/mr_ss_king_420/";
+            }, 3000);
         }
     </script>
 
